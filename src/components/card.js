@@ -8,27 +8,31 @@ let animeArray = dataset['data']
 function Card(){
     const a1 = animeArray[Math.floor(Math.random()*animeArray.length)]
     const a2 = animeArray[Math.floor(Math.random()*animeArray.length)]
+    const [over, setOver] = useState(false)
     const [move, setMove] = useState(false)
+    const [score, setScore] = useState(0)
     const [anime, setAnime] = useState([a1, a2])
 
     function answerCorrect()
     {
-        anime = setAnime([a2, animeArray[Math.floor(Math.random()*animeArray.length)]]);
+        const newAnime = animeArray[Math.floor(Math.random()*animeArray.length)];
+        setAnime([anime[1], newAnime]);
+        setScore(score+1);
     }
 
     function answerWrong()
     {
-
+        setOver(true)
     }
 
-    function displayGame (){
+    function displayAnime(){
             return (
                 <div className='movie-bg'>
                     <div class="container">
                         <img src = {anime[0].node.main_picture.large} alt="" className="movie"/>
                         <div class="text-wrapper">
                         <h2>{anime[0].node.title} has a </h2>
-                         <h2 className = "rating">{anime[1].node.mean}</h2>
+                         <h2 className = "rating">{anime[0].node.mean}</h2>
                          <h2> rating on MyAnimeList</h2>
                         </div>
                     </div>
@@ -37,11 +41,13 @@ function Card(){
                         <img src = {anime[1].node.main_picture.large} alt="" className="movie"/>
                         <div class="text-wrapper">
                         <h2>{anime[1].node.title}</h2>
+                        <h2 className = "rating">{anime[1].node.mean}</h2>
+                         <h2> rating on MyAnimeList</h2>
                         <button className="btn1" onClick={()=>{
-                            answerCorrect()
+                            anime[1].node.mean >= anime[0].node.mean ? answerCorrect() : answerWrong()
                         }}>Higher<div className='arrow-up'></div></button>
                         <button className="btn2"onClick={()=>{
-                            answerCorrect()
+                            anime[1].node.mean <= anime[0].node.mean ? answerCorrect() : answerWrong()
                         }}>Lower<div className='arrow-down'></div></button>
                         </div>
                     </div>
@@ -51,11 +57,26 @@ function Card(){
                 </div>
             )
         }
+
+        function gameOver(){
+        return (
+            <div className="lost-overlay">
+                <div className="lost-box">
+                <h1>You Lost</h1>
+                <h2>Your score is {score}</h2>
+                <button className="btn3" onClick={()=>{
+                        }}>Retry</button>
+                </div>
+                </div> 
+        )
+    }
     
 
-
     return (
-            displayGame()
+        <div className='App'>
+            {displayAnime()}
+            {over === true ? gameOver():null}
+        </div>
         )
 }
 
