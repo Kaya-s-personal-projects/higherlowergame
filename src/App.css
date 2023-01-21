@@ -6,34 +6,7 @@
   position: relative;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-
-.movie-bg{
+.wrapper1{
   min-height: 100vh;
   display: flex;
   flex-direction: row;
@@ -42,19 +15,22 @@
   
 }
 
-.movie{
+.wrapper2{
+  display: flex;
+  position: static;  
+  width: 50vw;
+  height: 100vh;
+  text-align: center;
+  position: relative;
+}
+
+.imageWrapper{
   display: flex;
   object-fit: cover;
   position: static;  
   width: 50vw;
   height: 100vh;
-  filter: brightness(50%);
-}
-
-.container {
-  position: relative;
-  text-align: center;
-  color: white;
+  filter: brightness(40%);
 }
 
 /* Bottom left text */
@@ -99,10 +75,6 @@
   width: 100px;
   border-radius: 50%;
   background-color: #ffffff;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  top: 0;
   margin: auto;
   overflow: hidden;
   display: flex;
@@ -110,12 +82,44 @@
   justify-content: center;
 }
 
+@keyframes SlideUp {
+  from{
+    transform: translateY(100%);
+  }
+  to{
+    transform: translateY(0%);
+  }
+}
+
+.correct{
+  height: 100px;
+  width: 100px;
+  background-color: #56F5B6;
+  position: absolute;
+  animation: SlideUp .3s ease-in-out;
+  z-index: 0;
+}
+
+.wrong{
+  height: 100px;
+  width: 100px;
+  background-color: #F57156;
+  position: absolute;
+  animation: SlideUp .3s ease-in-out;
+  z-index: 0;
+}
+
+.vs{
+  z-index: 1;
+}
+
 .text-wrapper{
   display: flex;
   flex-direction: column;
   position: absolute;
-  top: 60%;
+  top: 50%;
   left: 50%;
+  color:rgb(255, 255, 255);
   transform: translate(-50%, -50%);
   align-items: center;
 }
@@ -167,7 +171,13 @@
 
 .rating{
   font-size: 50px;
+  font-weight: bold;
   color: #fff34a;
+}
+
+.score{
+  font-size: 40px;
+  color: #f1f1f1;
 }
 
 .arrow-up {
@@ -206,3 +216,25 @@
   justify-content: center;
   flex-direction: column;
 }
+
+@keyframes SlideUp {
+  from{
+    transform: translateY(100%);
+  }
+  to{
+    transform: translateY(0%);
+  }
+
+}
+
+@keyframes SlideSide {
+  to{
+    transform: translateX(-100%);
+  }
+}
+
+.imageWrapper-animate{
+  animation: SlideSide 300ms ease;
+  animation-fill-mode: forwards;  
+}
+
