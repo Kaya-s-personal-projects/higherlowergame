@@ -1,12 +1,16 @@
-import dataset from '../top500.json';
+import top500list from '../top500.json';
+import animelist from '../animelist.json';
+import checksvg from '../svg/check.svg'
+import closesvg from '../svg/close.svg'
+import classroomImg from '../img/classroom.jpg'
 import React, {useState, useEffect} from 'react'; 
 import CountUp from 'react-countup';
 import { motion, AnimatePresence } from 'framer-motion';
 import '../App.css'
 
-let animeArray = dataset['data']
+let animeArray = animelist//2200 anime TV shows
 
-function Card(){
+function Game({gameToApp}){
     const a1 = animeArray[Math.floor(Math.random()*animeArray.length)]
     const a2 = animeArray[Math.floor(Math.random()*animeArray.length)]
     const [anime, setAnime] = useState([a1, a2])
@@ -15,21 +19,28 @@ function Card(){
     const [score, setScore] = useState(0)
     const [status, setStatus] = useState(0)
     const [showRating, setShowRating] = useState(false)
-    let animeSlide = null;
+    const [animeBuffer, setAnimeBuffer] = useState(null)
 
     function answerCorrect()
     {
         setShowRating(true)
-        setAnimation(true)
+        let animeBuffer = anime[1]
+        setAnimeBuffer(animeBuffer)
         setStatus(1)
+        const newAnime = animeArray[Math.floor(Math.random()*animeArray.length)];
+        
         setTimeout(() => {
-            const newAnime = animeArray[Math.floor(Math.random()*animeArray.length)];
-            setAnime([anime[1], newAnime]);
-            setScore(score+1);
+            setAnimation(true)
+            setAnime([anime[0], newAnime]);
             setShowRating(false)
-            setAnimation(false)
             setStatus(0)
-        }, 500)
+        },800)
+
+        setTimeout(() => {
+            setScore(score+1);
+            setAnimation(false)
+            setAnime([animeBuffer, newAnime]);
+        }, 1200)
     }
 
     function answerWrong()
@@ -54,7 +65,7 @@ function Card(){
     {
         return(
             <div className='imageWrapper-animate'>
-                <img src = {anime[1].node.main_picture.large} alt="" className="imageWrapper"/>
+                <img src = {animeBuffer.node.main_picture.large} alt="" className="imageWrapper"/>
             </div>
         )
     }
@@ -65,14 +76,38 @@ function Card(){
             return(
                 <div className="circle">
                     <div className='correct'/>
-                    <h1 className='vs'>VS</h1>
+                    <motion.div
+                        className = 'svg'
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        transition={{
+                            type: "spring",
+                            stiffness: 260,
+                            damping: 20
+                            
+                    }}
+                    >
+                    <img className = 'svg' src={checksvg}/>
+                    </motion.div>
                 </div>
             )
         }else if (status === 2){
             return(
                 <div className="circle">
                     <div className='wrong'/>
-                    <h1 className='vs'>VS</h1>
+                    <motion.div
+                        className = 'svg'
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        transition={{
+                            type: "spring",
+                            stiffness: 260,
+                            damping: 20
+                            
+                    }}
+                    >
+                    <img className = 'svg' src={closesvg}/>
+                    </motion.div>
                 </div>
             )
         }else{
@@ -82,13 +117,6 @@ function Card(){
                 </div>
             )
         }
-    }
-    function GameMenu()
-    {
-        return (
-            <div className='wrapper1'>
-            </div>
-        )
     }
 
     function startGame()
@@ -113,8 +141,8 @@ function Card(){
                     </div>
 
                     <div class="wrapper2">
-                        {animation && <Animation/>}
                         <img src = {anime[1].node.main_picture.large} alt="" className='imageWrapper'/>
+                        {animation && <Animation/>}
 
                         <div class="text-wrapper">
                         <h1>"{anime[1].node.title}"</h1>
@@ -145,6 +173,9 @@ function Card(){
                 <button className="btn3" onClick={()=>{ 
                     startGame()
                         }}>Retry</button>
+                <button className="btn3" onClick={()=>{ 
+                    gameToApp(false)
+                        }}>Return</button>
                 </div>
                 </div> 
         )
@@ -159,4 +190,4 @@ function Card(){
         )
 }
 
-export default Card
+export default Game

@@ -92,8 +92,8 @@
 }
 
 .correct{
-  height: 100px;
-  width: 100px;
+  height: 105px;
+  width: 105px;
   background-color: #56F5B6;
   position: absolute;
   animation: SlideUp .3s ease-in-out;
@@ -101,12 +101,18 @@
 }
 
 .wrong{
-  height: 100px;
-  width: 100px;
+  height: 105px;
+  width: 105px;
   background-color: #F57156;
   position: absolute;
   animation: SlideUp .3s ease-in-out;
   z-index: 0;
+}
+
+.svg{
+  height: 60px;
+  width: 60px;
+  z-index: 1;
 }
 
 .vs{
@@ -234,7 +240,59 @@
 }
 
 .imageWrapper-animate{
-  animation: SlideSide 300ms ease;
+  position: absolute;
+  animation: SlideSide 400ms ease;
   animation-fill-mode: forwards;  
 }
 
+.menuWrapper{
+  background-image: linear-gradient(to top, #041c32, #031f34, #032135, #032437, #032638, #03293c, #042d40, #043044, #04354c, #053b53, #05405b, #064663);
+  min-height: 100vh;
+  min-width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.menuWrapper2{
+  position: absolute;
+  height: 60%;
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  
+}
+
+.menu-text{
+  font-size: 50px;
+  color: #ECB365;
+}
+
+.menu-bg{
+  position: absolute;
+  object-fit: cover;
+  height: 100vh;
+  width: 100vw;
+  filter: blur(8px);
+  -webkit-filter: blur(8px);
+  filter: brightness(40%);
+}
+
+.menu-btn{
+  position: absolute;
+  width: 150px;
+  height: 50px;
+  margin-bottom: 20px;
+  background: #aec3dc;
+  color: #151515;
+  border: 1px rgb(19, 19, 19) solid;
+  border-radius: 20px;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
