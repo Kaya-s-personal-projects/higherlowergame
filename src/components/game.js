@@ -1,5 +1,6 @@
 import top500list from '../top500.json';
 import animelist from '../animelist.json';
+import placeholder from '../animePlaceholder.json';
 import checksvg from '../svg/check.svg'
 import closesvg from '../svg/close.svg'
 import classroomImg from '../img/classroom.jpg'
@@ -7,27 +8,74 @@ import React, {useState, useEffect} from 'react';
 import CountUp from 'react-countup';
 import { motion, AnimatePresence } from 'framer-motion';
 import '../App.css'
+import axios from 'axios';
 
 let animeArray = animelist//2200 anime TV shows
 
-function Game({gameToApp}){
-    const a1 = animeArray[Math.floor(Math.random()*animeArray.length)]
-    const a2 = animeArray[Math.floor(Math.random()*animeArray.length)]
-    const [anime, setAnime] = useState([a1, a2])
+function Game({setStart, gameMode, setGameMode}){
     const [over, setOver] = useState(false)
     const [animation, setAnimation] = useState(false)
     const [score, setScore] = useState(0)
     const [status, setStatus] = useState(0)
     const [showRating, setShowRating] = useState(false)
     const [animeBuffer, setAnimeBuffer] = useState(null)
+    const [anime, setAnime] = useState([placeholder, placeholder])
 
-    function answerCorrect()
-    {
+    useEffect(() => {
+        const fetchData = async()=> {
+            let a1 = await getAnime();
+            let a2 = await getAnime();
+            setAnime([a1,a2])
+        }
+        fetchData()
+      }, []);
+
+    const getResponse = async (url) => {
+        try {
+             const response = await axios.get(url)
+             console.log(response['data'])
+             return response['data']
+        } catch(err) {
+             console.log(err)
+             alert(`Failed to get anime from the server`);
+        }
+   }
+
+   const getAnime = async () => {
+    
+        if(gameMode=="classic"){
+            let URL = `http://localhost:8080/classic`
+            let result = await getResponse(URL)
+            return result
+        }
+        else if(gameMode=="custom")
+        {
+            let URL = `http://localhost:8080/userAnime`
+            let config = {
+                  'params':{
+                            'userid': "userid"
+                          }
+            }
+
+            axios.get(URL, config)
+            .then((response)=>{
+                return response.data
+            })
+            .catch(function (error) {
+            console.log(error.toJSON());
+                alert(`Failed to get anime from the server`);
+                return null
+            });
+        }
+    }
+
+    const answerCorrect = async () => {
+    
         setShowRating(true)
         let animeBuffer = anime[1]
         setAnimeBuffer(animeBuffer)
         setStatus(1)
-        const newAnime = animeArray[Math.floor(Math.random()*animeArray.length)];
+        let newAnime = await getAnime()
         
         setTimeout(() => {
             setAnimation(true)
@@ -84,7 +132,6 @@ function Game({gameToApp}){
                             type: "spring",
                             stiffness: 260,
                             damping: 20
-                            
                     }}
                     >
                     <img className = 'svg' src={checksvg}/>
@@ -119,7 +166,7 @@ function Game({gameToApp}){
         }
     }
 
-    function startGame()
+    function reset()
     {
         setScore(0)
         setOver(false)
@@ -147,7 +194,7 @@ function Game({gameToApp}){
                         <div class="text-wrapper">
                         <h1>"{anime[1].node.title}"</h1>
                         { showRating && <Counter/>}
-                        {/* <h2 className = "rating">{anime[1].node.mean}</h2> */}
+                        <h2 className = "rating">{anime[1].node.mean}</h2>
                         <button className="btn1" onClick={()=>{
                             anime[1].node.mean >= anime[0].node.mean ? answerCorrect() : answerWrong()
                         }}>Higher<div className='arrow-up'></div></button>
@@ -171,10 +218,10 @@ function Game({gameToApp}){
                 <h1>You Lost</h1>
                 <h2>Your score is {score}</h2>
                 <button className="btn3" onClick={()=>{ 
-                    startGame()
+                    reset()
                         }}>Retry</button>
                 <button className="btn3" onClick={()=>{ 
-                    gameToApp(false)
+                    setStart(false)
                         }}>Return</button>
                 </div>
                 </div> 
