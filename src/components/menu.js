@@ -52,7 +52,7 @@ function Menu({ setStart, setAnimelist}){
 
     const handleSubmit = async (event) => {
       event.preventDefault()
-      let URL = `http://ec2-18-236-100-99.us-west-2.compute.amazonaws.com:8080/custom`
+      let URL = `https://localhost:8080/custom`
       let config = {
         params: {'userId': `${valueForUserId}`}
       }
@@ -85,7 +85,7 @@ function Menu({ setStart, setAnimelist}){
       }
       mediaInput = mediaInput.replace(/,\s*$/, "");
 
-      let URL = `http://ec2-18-236-100-99.us-west-2.compute.amazonaws.com:8080/classic`
+      let URL = `https://localhost:8080/classic`
       let config = {
           params:{
                       'year':`${year[0]}, ${year[1]}`,
@@ -107,7 +107,7 @@ function Menu({ setStart, setAnimelist}){
         return
       }
 
-      let URL = `http://ec2-18-236-100-99.us-west-2.compute.amazonaws.com:8080/custom`
+      let URL = `https://localhost:8080/custom`
       let config = {
           params:{
                       'userId':`${userId}`
