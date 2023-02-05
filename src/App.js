@@ -7,28 +7,21 @@ import Menu from './components/menu'
 function App() {
 
   const [start, setStart] = useState(false);
-  const [gameMode, setGameMode] = useState("");
-  const [year, setYear] = useState([2000,2022]);
-  const [media, setMedia] = useState([""]);
-  const [userId, setUserId] = useState(0);
+  const [animeList, setAnimelist] = useState({});
 
   const changeStart = (data) => {
     setStart(data)
   }
 
-  const changeGameMode = (data) => {
-    setGameMode(data)
-  }
 
-  const changeYear = (data) => {
-    setGameMode([data[0], data[1]])
+  const changeAnimeList = (data) => {
+    setAnimelist(data)
   }
 
   return (
     <div className="App">
-      {!start && <Menu setStart = {changeStart} gameMode = {gameMode} setGameMode = {changeGameMode} 
-      year = {year} setYear = {changeYear} userId = {userId} setUserId = {setUserId}/>}
-      {start  && <Game setStart = {changeStart} gameMode = {gameMode} year = {year} userId = {userId}/>}
+      {!start && <Menu setStart = {changeStart} animeList = {animeList} setAnimelist = {changeAnimeList}/>}
+      {start  && <Game setStart = {changeStart}  userAnimeList = {animeList}/>}
     </div>
   );
 }

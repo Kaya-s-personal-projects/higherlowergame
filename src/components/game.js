@@ -1,18 +1,32 @@
-import top500list from '../top500.json';
-import animelist from '../animelist.json';
+import animelist from '../animelistFrom2010.json';
 import placeholder from '../animePlaceholder.json';
 import checksvg from '../svg/check.svg'
 import closesvg from '../svg/close.svg'
-import classroomImg from '../img/classroom.jpg'
-import React, {useState, useEffect} from 'react'; 
+import React, {useRef, useState, useEffect} from 'react'; 
 import CountUp from 'react-countup';
 import { motion, AnimatePresence } from 'framer-motion';
 import '../App.css'
 import axios from 'axios';
 
-let animeArray = animelist//2200 anime TV shows
 
-function Game({setStart, gameMode, setGameMode}){
+import { createTheme } from '@mui/material/styles';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
+
+const theme = createTheme({
+    palette: {
+      primary: {
+        main: '#bdbdbd',
+      },
+      secondary: {
+        main: '#bdbdbd'
+      }
+    }
+  });
+
+var animeArray = animelist//2200 anime TV shows
+
+function Game({setStart, userAnimeList}){
     const [over, setOver] = useState(false)
     const [animation, setAnimation] = useState(false)
     const [score, setScore] = useState(0)
@@ -21,53 +35,22 @@ function Game({setStart, gameMode, setGameMode}){
     const [animeBuffer, setAnimeBuffer] = useState(null)
     const [anime, setAnime] = useState([placeholder, placeholder])
 
+    const initRef = useRef(false);
+    const threshold = 0.1
     useEffect(() => {
-        const fetchData = async()=> {
-            let a1 = await getAnime();
-            let a2 = await getAnime();
-            setAnime([a1,a2])
-        }
-        fetchData()
+
+        if (initRef.current) return;
+        initRef.current = true;
+        animeArray = userAnimeList
+        var a1, a2;
+        do
+        {
+            a1 = animeArray[Math.floor(Math.random()*animeArray.length)]
+            a2 = animeArray[Math.floor(Math.random()*animeArray.length)]
+        }while(a1['malId'] === a2['malId'] || Math.abs(a1['mean'] - a2['mean']) <= threshold)
+        setAnime([a1,a2])
       }, []);
 
-    const getResponse = async (url) => {
-        try {
-             const response = await axios.get(url)
-             console.log(response['data'])
-             return response['data']
-        } catch(err) {
-             console.log(err)
-             alert(`Failed to get anime from the server`);
-        }
-   }
-
-   const getAnime = async () => {
-    
-        if(gameMode=="classic"){
-            let URL = `http://localhost:8080/classic`
-            let result = await getResponse(URL)
-            return result
-        }
-        else if(gameMode=="custom")
-        {
-            let URL = `http://localhost:8080/userAnime`
-            let config = {
-                  'params':{
-                            'userid': "userid"
-                          }
-            }
-
-            axios.get(URL, config)
-            .then((response)=>{
-                return response.data
-            })
-            .catch(function (error) {
-            console.log(error.toJSON());
-                alert(`Failed to get anime from the server`);
-                return null
-            });
-        }
-    }
 
     const answerCorrect = async () => {
     
@@ -75,7 +58,10 @@ function Game({setStart, gameMode, setGameMode}){
         let animeBuffer = anime[1]
         setAnimeBuffer(animeBuffer)
         setStatus(1)
-        let newAnime = await getAnime()
+        let newAnime
+        do{
+            newAnime = animeArray[Math.floor(Math.random()*animeArray.length)]
+        }while(newAnime['malId'] === anime[1]['malId'] || Math.abs(newAnime['mean'] - anime[1]['mean']) <= threshold)
         
         setTimeout(() => {
             setAnimation(true)
@@ -105,7 +91,7 @@ function Game({setStart, gameMode, setGameMode}){
     function Counter()
     {
         return (
-            <CountUp className = "rating" end={anime[1].node.mean} decimals={2} duration={0.4}/>
+            <CountUp className = "rating" end={anime[1].mean} decimals={2} duration={0.4}/>
         )
     }
 
@@ -113,7 +99,7 @@ function Game({setStart, gameMode, setGameMode}){
     {
         return(
             <div className='imageWrapper-animate'>
-                <img src = {animeBuffer.node.main_picture.large} alt="" className="imageWrapper"/>
+                <img src = {animeBuffer.main_picture_large} alt="" className="imageWrapper"/>
             </div>
         )
     }
@@ -170,8 +156,12 @@ function Game({setStart, gameMode, setGameMode}){
     {
         setScore(0)
         setOver(false)
-        const a1 = animeArray[Math.floor(Math.random()*animeArray.length)]
-        const a2 = animeArray[Math.floor(Math.random()*animeArray.length)]
+        var a1, a2;
+        do
+        {
+            a1 = animeArray[Math.floor(Math.random()*animeArray.length)]
+            a2 = animeArray[Math.floor(Math.random()*animeArray.length)]
+        }while(a1['malId'] === a2['malId'] || Math.abs(a1['mean'] - a2['mean']) <= threshold)
         setAnime([a1, a2])
     }
 
@@ -179,27 +169,27 @@ function Game({setStart, gameMode, setGameMode}){
             return (
                 <div className='wrapper1'>
                     <div class='wrapper2'>
-                        <img src = {anime[0].node.main_picture.large} alt="" className='imageWrapper'/>
+                        <img src = {anime[0].main_picture_large} alt="" className='imageWrapper'/>
                         <div class="text-wrapper">
-                        <h1>"{anime[0].node.title}"</h1><h2> is rated </h2>
-                         <div className = "rating">{anime[0].node.mean}</div>
+                        <h1>"{anime[0].title}"</h1><h2> is rated </h2>
+                         <div className = "rating">{anime[0].mean.toFixed(2)}</div>
                          <h2> on MyAnimeList</h2>
                         </div>
                     </div>
 
                     <div class="wrapper2">
-                        <img src = {anime[1].node.main_picture.large} alt="" className='imageWrapper'/>
+                        <img src = {anime[1].main_picture_large} alt="" className='imageWrapper'/>
                         {animation && <Animation/>}
 
                         <div class="text-wrapper">
-                        <h1>"{anime[1].node.title}"</h1>
+                        <h1>"{anime[1].title}"</h1>
                         { showRating && <Counter/>}
-                        <h2 className = "rating">{anime[1].node.mean}</h2>
+                        {/* <h2 className = "rating">{anime[1].mean.toFixed(2)}</h2> */}
                         <button className="btn1" onClick={()=>{
-                            anime[1].node.mean >= anime[0].node.mean ? answerCorrect() : answerWrong()
+                            anime[1].mean >= anime[0].mean ? answerCorrect() : answerWrong()
                         }}>Higher<div className='arrow-up'></div></button>
                         <button className="btn2"onClick={()=>{
-                            anime[1].node.mean <= anime[0].node.mean ? answerCorrect() : answerWrong()
+                            anime[1].mean <= anime[0].mean ? answerCorrect() : answerWrong()
                         }}>Lower<div className='arrow-down'></div></button>
                         </div>
                     </div>
@@ -211,23 +201,24 @@ function Game({setStart, gameMode, setGameMode}){
             )
         }
 
-        function gameOver(){
+    function gameOver(){
         return (
-            <div className="lost-overlay">
-                <div className="lost-box">
-                <h1>You Lost</h1>
-                <h2>Your score is {score}</h2>
-                <button className="btn3" onClick={()=>{ 
-                    reset()
-                        }}>Retry</button>
-                <button className="btn3" onClick={()=>{ 
-                    setStart(false)
-                        }}>Return</button>
-                </div>
-                </div> 
-        )
+                <div className="lost-overlay">
+                    <div className="lost-box">
+                    <h1 style={{color: '#f1f1f1'}}>You Lost</h1>
+                    <h2 style={{color: '#f1f1f1'}}>Your score is {score}</h2>
+                    <Stack style={{margin: 30}}spacing={2} direction="row">
+                        <Button variant="contained" theme={theme} onClick={()=>{
+                            reset()
+                                }}>Retry</Button>
+                        <Button variant="contained" theme={theme} onClick={()=>{
+                            setStart(false)
+                                }}>Return</Button>
+                    </Stack>
+                    </div>
+                    </div> 
+            )
     }
-    
 
     return (
         <div className='App'>
