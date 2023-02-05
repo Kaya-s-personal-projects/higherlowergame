@@ -20,6 +20,7 @@ function App() {
 
   return (
     <div className="App">
+      <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"></meta>
       {!start && <Menu setStart = {changeStart} animeList = {animeList} setAnimelist = {changeAnimeList}/>}
       {start  && <Game setStart = {changeStart}  userAnimeList = {animeList}/>}
     </div>
