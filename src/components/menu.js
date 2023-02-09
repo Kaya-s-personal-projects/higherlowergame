@@ -54,6 +54,7 @@ function Menu({ setStart, setAnimelist}){
       event.preventDefault()
       let URL = `https://ec2-18-236-100-99.us-west-2.compute.amazonaws.com/custom`
       let config = {
+        headers: {"content-type": "application/json"},
         params: {'userId': `${valueForUserId}`}
       }
       let result = await getResponse(URL, config)
@@ -87,6 +88,7 @@ function Menu({ setStart, setAnimelist}){
 
       let URL = `https://ec2-18-236-100-99.us-west-2.compute.amazonaws.com/classic`
       let config = {
+          headers: {"content-type": "application/json"},
           params:{
                       'year':`${year[0]}, ${year[1]}`,
                       'media': `${mediaInput}`
@@ -109,6 +111,7 @@ function Menu({ setStart, setAnimelist}){
 
       let URL = `https://ec2-18-236-100-99.us-west-2.compute.amazonaws.com/custom`
       let config = {
+        headers: {"content-type": "application/json"},
           params:{
                       'userId':`${userId}`
                   }
