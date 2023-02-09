@@ -52,7 +52,7 @@ function Menu({ setStart, setAnimelist}){
 
     const handleSubmit = async (event) => {
       event.preventDefault()
-      let URL = `https://ec2-18-236-100-99.us-west-2.compute.amazonaws.com/custom`
+      let URL = `http://ec2-18-236-100-99.us-west-2.compute.amazonaws.com/custom`
       let config = {
         headers: {"content-type": "application/json"},
         params: {'userId': `${valueForUserId}`}
@@ -86,7 +86,7 @@ function Menu({ setStart, setAnimelist}){
       }
       mediaInput = mediaInput.replace(/,\s*$/, "");
 
-      let URL = `https://ec2-18-236-100-99.us-west-2.compute.amazonaws.com/classic`
+      let URL = `http://ec2-18-236-100-99.us-west-2.compute.amazonaws.com/classic`
       let config = {
           headers: {"content-type": "application/json"},
           params:{
@@ -109,7 +109,7 @@ function Menu({ setStart, setAnimelist}){
         return
       }
 
-      let URL = `https://ec2-18-236-100-99.us-west-2.compute.amazonaws.com/custom`
+      let URL = `http://ec2-18-236-100-99.us-west-2.compute.amazonaws.com/custom`
       let config = {
         headers: {"content-type": "application/json"},
           params:{
