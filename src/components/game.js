@@ -24,7 +24,7 @@ const theme = createTheme({
     }
   });
 
-var animeArray = animelist//2200 anime TV shows
+var animeArray = animelist//anime TV shows
 
 function Game({setStart, userAnimeList}){
     const [over, setOver] = useState(false)
@@ -33,26 +33,28 @@ function Game({setStart, userAnimeList}){
     const [status, setStatus] = useState(0)
     const [showRating, setShowRating] = useState(false)
     const [animeBuffer, setAnimeBuffer] = useState(null)
-    const [anime, setAnime] = useState([placeholder, placeholder])
+    var a1 = animeArray[Math.floor(Math.random()*animeArray.length)]
+    var a2 = animeArray[Math.floor(Math.random()*animeArray.length)]
+    const [anime, setAnime] = useState([a1, a2])
 
     const initRef = useRef(false);
     const threshold = 0.1
-    useEffect(() => {
+    // useEffect(() => {
 
-        if (initRef.current) return;
-        initRef.current = true;
-        animeArray = userAnimeList
-        var a1, a2;
-        do
-        {
-            a1 = animeArray[Math.floor(Math.random()*animeArray.length)]
-            a2 = animeArray[Math.floor(Math.random()*animeArray.length)]
-        }while(a1['malId'] === a2['malId'] || Math.abs(a1['mean'] - a2['mean']) <= threshold)
-        setAnime([a1,a2])
-      }, []);
+    //     if (initRef.current) return;
+    //     initRef.current = true;
+    //     animeArray = userAnimeList
+    //     var a1, a2;
+    //     do
+    //     {
+    //         a1 = animeArray[Math.floor(Math.random()*animeArray.length)]
+    //         a2 = animeArray[Math.floor(Math.random()*animeArray.length)]
+    //     }while(a1['malId'] === a2['malId'] || Math.abs(a1['mean'] - a2['mean']) <= threshold)
+    //     setAnime([a1,a2])
+    //   }, []);
 
 
-    const answerCorrect = async () => {
+    const answerCorrect = () => {
     
         setShowRating(true)
         let animeBuffer = anime[1]

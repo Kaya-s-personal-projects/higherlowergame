@@ -68,56 +68,57 @@ function Menu({ setStart, setAnimelist}){
 
     const handleClassicSubmit = async (event) => {
       event.preventDefault()
-      var media = ['tv', 'movie', 'ova', 'ona']
-      var mediaInput = ''
+      setStart(true);
+      // var media = ['tv', 'movie', 'ova', 'ona']
+      // var mediaInput = ''
 
-      let checker = arr => arr.every(v => v === false);
+      // let checker = arr => arr.every(v => v === false);
 
-      if (checker(mediaType)){
-        alert("Select at least one media type")
-        return
-      }
+      // if (checker(mediaType)){
+      //   alert("Select at least one media type")
+      //   return
+      // }
 
-      for (var k in mediaType)
-      {
-          if (mediaType[k])
-              mediaInput += '\'' + media[k] + '\''+ ", "
-      }
-      mediaInput = mediaInput.replace(/,\s*$/, "");
+      // for (var k in mediaType)
+      // {
+      //     if (mediaType[k])
+      //         mediaInput += '\'' + media[k] + '\''+ ", "
+      // }
+      // mediaInput = mediaInput.replace(/,\s*$/, "");
 
-      let URL = `https://localhost:8080/classic`
-      let config = {
-          params:{
-                      'year':`${year[0]}, ${year[1]}`,
-                      'media': `${mediaInput}`
-                  }
-      }
-      let result = await getResponse(URL, config)
-      if (result!= null){
-        setAnimelist(result)
-        setStart(true);
-      }
+      // let URL = `https://localhost:8080/classic`
+      // let config = {
+      //     params:{
+      //                 'year':`${year[0]}, ${year[1]}`,
+      //                 'media': `${mediaInput}`
+      //             }
+      // }
+      // let result = await getResponse(URL, config)
+      // if (result!= null){
+      //   setAnimelist(result)
+      //   setStart(true);
+      // }
     }
 
     const handleCustomSubmit = async (event) => {
       event.preventDefault()
-      
-      if (!userIdValid){
-        alert('Please enter a valid MAL userId')
-        return
-      }
+      setStart(true);
+      // if (!userIdValid){
+      //   alert('Please enter a valid MAL userId')
+      //   return
+      // }
 
-      let URL = `https://localhost:8080/custom`
-      let config = {
-          params:{
-                      'userId':`${userId}`
-                  }
-      }
-      let result = await getResponse(URL, config)
-      if (result!= null){
-        setAnimelist(result)
-        setStart(true);
-      }
+      // let URL = `https://localhost:8080/custom`
+      // let config = {
+      //     params:{
+      //                 'userId':`${userId}`
+      //             }
+      // }
+      // let result = await getResponse(URL, config)
+      // if (result!= null){
+      //   setAnimelist(result)
+      //   setStart(true);
+      // }
     }
 
     const handleChange = (event, newValue) => {
