@@ -23,9 +23,8 @@ function App() {
 
   return (
     <div className="App">
-      {/* {!start && <Menu setStart = {changeStart} animeList = {animeList} setAnimelist = {changeAnimeList}/>}
-      {start  && <Game setStart = {changeStart}  userAnimeList = {animeList}/>} */}
-      <Game setStart = {changeStart}  userAnimeList = {animeList} isMobile = {isMobile}/>
+      {!start && <Menu setStart = {changeStart} animeList = {animeList} setAnimelist = {changeAnimeList}/>}
+      {start  && <Game setStart = {changeStart}  userAnimeList = {animeList} isMobile = {isMobile}/>}
     </div>
   );
 }

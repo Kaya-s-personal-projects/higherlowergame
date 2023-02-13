@@ -6,7 +6,6 @@ import React, {useRef, useState, useEffect} from 'react';
 import CountUp from 'react-countup';
 import { motion, AnimatePresence } from 'framer-motion';
 import '../App.css'
-import axios from 'axios';
 
 
 import { createTheme } from '@mui/material/styles';
@@ -139,8 +138,7 @@ function Game({setStart, userAnimeList, isMobile}){
                             stiffness: 260,
                             damping: 20
                             
-                    }}
-                    >
+                    }}>
                     <img className = 'svg' src={closesvg}/>
                     </motion.div>
                 </div>

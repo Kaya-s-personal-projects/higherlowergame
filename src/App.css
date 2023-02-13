@@ -130,7 +130,6 @@
   background-color: #56F5B6;
   position: absolute;
   animation: SlideUp .3s ease-in-out;
-  z-index: 0;
 }
 
 .wrong{
@@ -139,7 +138,6 @@
   background-color: #F57156;
   position: absolute;
   animation: SlideUp .3s ease-in-out;
-  z-index: 0;
 }
 
 .svg{
