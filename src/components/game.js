@@ -109,8 +109,8 @@ function Game({setStart, userAnimeList, isMobile}){
     {
         if(status===1){
             return(
-                <div style={{'overflow-x' : 'hidden'}}>
                     <div className="circle">
+                        <div style={{'overflow-x' : 'hidden'}}>
                         <div className='correct'/>
                         <motion.div
                             className = 'svg'
@@ -124,8 +124,8 @@ function Game({setStart, userAnimeList, isMobile}){
                         >
                         <img className = 'svg' src={checksvg}/>
                         </motion.div>
+                        </div>
                     </div>
-                </div>
             )
         }else if (status === 2){
             return(
