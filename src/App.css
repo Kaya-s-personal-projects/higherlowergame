@@ -6,7 +6,7 @@
   position: relative;
 }
 
-.wrapper1{
+.game-wrapper-deskop{
   min-height: 100vh;
   display: flex;
   flex-direction: row;
@@ -15,7 +15,7 @@
   
 }
 
-.wrapper2{
+.game-card-wrapper-desktop{
   display: flex;
   position: static;  
   width: 50vw;
@@ -24,12 +24,45 @@
   position: relative;
 }
 
-.imageWrapper{
+
+.game-wrapper-mobile{
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  border: 1px red solid;
+  align-items: center;
+  justify-content: center;
+  
+}
+
+.game-card-wrapper-mobile{
+  display: flex;
+  position: static;  
+  width: 100vw;
+  height: 50vh;
+  border: 1px blue solid;
+  text-align: center;
+  position: relative;
+}
+
+.image-wrapper-desktop{
   display: flex;
   object-fit: cover;
   position: static;  
   width: 50vw;
   height: 100vh;
+  filter: brightness(40%);
+}
+
+
+
+.image-wrapper-mobile{
+  display: flex;
+  object-fit: cover;
+  position: static;
+  border: 1px green solid;
+  width: 100vw;
+  height: 50vh;
   filter: brightness(40%);
 }
 
@@ -239,7 +272,19 @@
   }
 }
 
-.imageWrapper-animate{
+@keyframes SlideUp2 {
+  to{
+    transform: translateY(-100%);
+  }
+}
+
+.imageWrapper-animate-mobile{
+  position: absolute;
+  animation: SlideUp2 400ms ease;
+  animation-fill-mode: forwards;  
+}
+
+.imageWrapper-animate-desktop{
   position: absolute;
   animation: SlideSide 400ms ease;
   animation-fill-mode: forwards;  
