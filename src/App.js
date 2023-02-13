@@ -1,8 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
 import React, {useState, useEffect} from 'react'; 
-import MobileGame from './components/game-mobile'
-import DesktopGame from './components/game'
+// import MobileGame from './components/game-mobile'
+import Game from './components/game'
 import Menu from './components/menu'
 import { useMediaQuery } from 'react-responsive';
 
@@ -25,7 +25,7 @@ function App() {
     <div className="App">
       {/* {!start && <Menu setStart = {changeStart} animeList = {animeList} setAnimelist = {changeAnimeList}/>}
       {start  && <Game setStart = {changeStart}  userAnimeList = {animeList}/>} */}
-      {isMobile ? <MobileGame setStart = {changeStart}  userAnimeList = {animeList}/>:<DesktopGame setStart = {changeStart}  userAnimeList = {animeList}/>}
+      <Game setStart = {changeStart}  userAnimeList = {animeList} isMobile = {isMobile}/>
     </div>
   );
 }

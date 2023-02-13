@@ -29,7 +29,7 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  border: 1px red solid;
+  /* border: 1px red solid; */
   align-items: center;
   justify-content: center;
   
@@ -40,7 +40,7 @@
   position: static;  
   width: 100vw;
   height: 50vh;
-  border: 1px blue solid;
+  /* border: 1px blue solid; */
   text-align: center;
   position: relative;
 }
@@ -60,7 +60,7 @@
   display: flex;
   object-fit: cover;
   position: static;
-  border: 1px green solid;
+  /* border: 1px green solid; */
   width: 100vw;
   height: 50vh;
   filter: brightness(40%);

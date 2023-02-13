@@ -26,7 +26,7 @@ const theme = createTheme({
 
 var animeArray = animelist//anime TV shows
 
-function Game({setStart, userAnimeList}){
+function Game({setStart, userAnimeList, isMobile}){
     const [over, setOver] = useState(false)
     const [animation, setAnimation] = useState(false)
     const [score, setScore] = useState(0)
@@ -100,8 +100,8 @@ function Game({setStart, userAnimeList}){
     function Animation()
     {
         return(
-            <div className='imageWrapper-animate-desktop'>
-                <img src = {animeBuffer.main_picture_large} alt="" className="image-wrapper-desktop"/>
+            <div className={isMobile ?  'imageWrapper-animate-mobile' : 'imageWrapper-animate-desktop'}>
+                <img src = {animeBuffer.main_picture_large} alt="" className={isMobile ? "image-wrapper-mobile" : "image-wrapper-desktop"}/>
             </div>
         )
     }
@@ -169,9 +169,9 @@ function Game({setStart, userAnimeList}){
 
     function displayAnime(){
             return (
-                <div className='game-wrapper-deskop'>
-                    <div class='game-card-wrapper-desktop'>
-                        <img src = {anime[0].main_picture_large} alt="" className='image-wrapper-desktop'/>
+                <div className={isMobile ? 'game-wrapper-mobile':'game-wrapper-deskop'}>
+                    <div class={isMobile ? 'game-card-wrapper-mobile' : 'game-card-wrapper-desktop'}>
+                        <img src = {anime[0].main_picture_large} alt="" className={isMobile ? 'image-wrapper-mobile' : 'image-wrapper-desktop'}/>
                         <div class="text-wrapper">
                         <h1>"{anime[0].title}"</h1><h2> is rated </h2>
                          <div className = "rating">{anime[0].mean.toFixed(2)}</div>
@@ -179,8 +179,8 @@ function Game({setStart, userAnimeList}){
                         </div>
                     </div>
 
-                    <div class="game-card-wrapper-desktop">
-                        <img src = {anime[1].main_picture_large} alt="" className='image-wrapper-desktop'/>
+                    <div class={isMobile ? 'game-card-wrapper-mobile' : 'game-card-wrapper-desktop'}>
+                        <img src = {anime[1].main_picture_large} alt="" className={isMobile ? 'image-wrapper-mobile' : 'image-wrapper-desktop'}/>
                         {animation && <Animation/>}
 
                         <div class="text-wrapper">
