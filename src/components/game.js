@@ -109,20 +109,22 @@ function Game({setStart, userAnimeList, isMobile}){
     {
         if(status===1){
             return(
-                <div className="circle">
-                    <div className='correct'/>
-                    <motion.div
-                        className = 'svg'
-                        initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
-                        transition={{
-                            type: "spring",
-                            stiffness: 260,
-                            damping: 20
-                    }}
-                    >
-                    <img className = 'svg' src={checksvg}/>
-                    </motion.div>
+                <div style={{'overflow-x' : 'hidden'}}>
+                    <div className="circle">
+                        <div className='correct'/>
+                        <motion.div
+                            className = 'svg'
+                            initial={{ scale: 0 }}
+                            animate={{ scale: 1 }}
+                            transition={{
+                                type: "spring",
+                                stiffness: 260,
+                                damping: 20
+                        }}
+                        >
+                        <img className = 'svg' src={checksvg}/>
+                        </motion.div>
+                    </div>
                 </div>
             )
         }else if (status === 2){
