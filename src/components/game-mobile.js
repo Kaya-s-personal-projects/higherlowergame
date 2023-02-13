@@ -100,8 +100,8 @@ function Game({setStart, userAnimeList}){
     function Animation()
     {
         return(
-            <div className='imageWrapper-animate-desktop'>
-                <img src = {animeBuffer.main_picture_large} alt="" className="image-wrapper-desktop"/>
+            <div className='imageWrapper-animate-mobile'>
+                <img src = {animeBuffer.main_picture_large} alt="" className="image-wrapper-mobile"/>
             </div>
         )
     }
@@ -169,9 +169,9 @@ function Game({setStart, userAnimeList}){
 
     function displayAnime(){
             return (
-                <div className='game-wrapper-deskop'>
-                    <div class='game-card-wrapper-desktop'>
-                        <img src = {anime[0].main_picture_large} alt="" className='image-wrapper-desktop'/>
+                <div className='game-wrapper-mobile'>
+                    <div class='game-card-wrapper-mobile'>
+                        <img src = {anime[0].main_picture_large} alt="" className='image-wrapper-mobile'/>
                         <div class="text-wrapper">
                         <h1>"{anime[0].title}"</h1><h2> is rated </h2>
                          <div className = "rating">{anime[0].mean.toFixed(2)}</div>
@@ -179,14 +179,15 @@ function Game({setStart, userAnimeList}){
                         </div>
                     </div>
 
-                    <div class="game-card-wrapper-desktop">
-                        <img src = {anime[1].main_picture_large} alt="" className='image-wrapper-desktop'/>
+                    <div class="game-card-wrapper-mobile">
+                        <img src = {anime[1].main_picture_large} alt="" className='image-wrapper-mobile'/>
+                        
                         {animation && <Animation/>}
 
                         <div class="text-wrapper">
                         <h1>"{anime[1].title}"</h1>
                         { showRating && <Counter/>}
-                        {/* <h2 className = "rating">{anime[1].mean.toFixed(2)}</h2> */}
+                        <h2 className = "rating">{anime[1].mean.toFixed(2)}</h2>
                         <button className="btn1" onClick={()=>{
                             anime[1].mean >= anime[0].mean ? answerCorrect() : answerWrong()
                         }}>Higher<div className='arrow-up'></div></button>
