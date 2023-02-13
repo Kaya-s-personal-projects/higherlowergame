@@ -109,7 +109,6 @@
   border-radius: 50%;
   background-color: #ffffff;
   overflow: hidden;
-  overflow-x:hidden;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -127,6 +126,7 @@
 .correct{
   height: 105px;
   width: 105px;
+  overflow: hidden;
   background-color: #56F5B6;
   position: absolute;
   animation: SlideUp .3s ease-in-out;
@@ -135,6 +135,7 @@
 .wrong{
   height: 105px;
   width: 105px;
+  overflow: hidden;
   background-color: #F57156;
   position: absolute;
   animation: SlideUp .3s ease-in-out;
