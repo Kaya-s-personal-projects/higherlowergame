@@ -108,8 +108,8 @@
   width: 100px;
   border-radius: 50%;
   background-color: #ffffff;
-  margin: auto;
   overflow: hidden;
+  overflow-x:hidden;
   display: flex;
   align-items: center;
   justify-content: center;
