@@ -109,7 +109,7 @@ function Game({setStart, userAnimeList, isMobile}){
     {
         if(status===1){
             return(
-                    <div className="circle">
+                    <div className={isMobile ? "circle-mobile" :"circle-desktop"}>
                         <div className='correct'/>
                         <motion.div
                             className = 'svg'
@@ -128,7 +128,7 @@ function Game({setStart, userAnimeList, isMobile}){
             )
         }else if (status === 2){
             return(
-                <div className="circle">
+                <div className={isMobile ? "circle-mobile" :"circle-desktop"}>
                     <div className='wrong'/>
                     <motion.div
                         className = 'svg'
@@ -146,7 +146,7 @@ function Game({setStart, userAnimeList, isMobile}){
             )
         }else{
             return(
-                <div className="circle">
+                <div className={isMobile ? "circle-mobile" :"circle-desktop"}>
                     <h1 className='vs'>VS</h1>
                 </div>
             )
@@ -189,14 +189,14 @@ function Game({setStart, userAnimeList, isMobile}){
                         <button className="btn1" onClick={()=>{
                             anime[1].mean >= anime[0].mean ? answerCorrect() : answerWrong()
                         }}>Higher<div className='arrow-up'></div></button>
-                        <button className="btn2"onClick={()=>{
+                        <button className="btn1"onClick={()=>{
                             anime[1].mean <= anime[0].mean ? answerCorrect() : answerWrong()
                         }}>Lower<div className='arrow-down'></div></button>
                         </div>
                     </div>
                     <CircleStatus/>
                     <div className="bottom-left">
-                        <h2 className='score'>Score: {score}</h2>
+                        <h1 className='score'>Score: {score}</h1>
 	                </div>
                 </div>
             )

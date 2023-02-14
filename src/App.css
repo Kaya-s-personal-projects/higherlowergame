@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;0,1000;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900;1,1000&display=swap');
+
 .App {
   display: flex;
   height: 100vh;
@@ -20,8 +22,8 @@
   position: static;  
   width: 50vw;
   height: 100vh;
-  text-align: center;
-  position: relative;
+  align-items: center;
+  justify-content: center;
 }
 
 
@@ -41,12 +43,11 @@
   width: 100vw;
   height: 50vh;
   /* border: 1px blue solid; */
-  text-align: center;
-  position: relative;
+  align-items: center;
+  justify-content: center;
 }
 
 .image-wrapper-desktop{
-  display: flex;
   object-fit: cover;
   position: static;  
   width: 50vw;
@@ -57,7 +58,6 @@
 
 
 .image-wrapper-mobile{
-  display: flex;
   object-fit: cover;
   position: static;
   /* border: 1px green solid; */
@@ -69,8 +69,8 @@
 /* Bottom left text */
 .bottom-left {
   position: absolute;
-  bottom: 8px;
-  left: 16px;
+  bottom: 2px;
+  left: 6px;
 }
 
 /* Top left text */
@@ -102,12 +102,24 @@
   transform: translate(-50%, -50%);
 }
 
-.circle{
+.circle-desktop{
   position: fixed;
   height: 100px;
   width: 100px;
   border-radius: 50%;
-  background-color: #ffffff;
+  background-color: #fbf9f9;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.circle-mobile{
+  position: fixed;
+  height: 70px;
+  width: 70px;
+  border-radius: 50%;
+  background-color: #f7f3f3;
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -142,10 +154,11 @@
 }
 
 .svg{
-  height: 60px;
-  width: 60px;
+  height: 50px;
+  width: 50px;
   z-index: 1;
 }
+
 
 .vs{
   z-index: 1;
@@ -155,50 +168,35 @@
   display: flex;
   flex-direction: column;
   position: absolute;
-  top: 50%;
-  left: 50%;
+  max-width: 70%;
+  height: auto;
+  text-align: center;
+
   color:rgb(255, 255, 255);
-  transform: translate(-50%, -50%);
+  border: 1px green solid;
   align-items: center;
+  justify-content: center;
+
+  font-family: 'Nunito', sans-serif;
 }
+
+h1 {
+  font-family: 'Nunito';
+  font-weight: 700;
+}
+
+h2 {
+  font-weight:400;
+}
+
 
 .btn1{
-  width: 150px;
-  height: 50px;
+  width: 120px;
+  height: 40px;
   margin-bottom: 20px;
   background: none;
   color: #e0e0e0;
   border: 1px white solid;
-  border-radius: 20px;
-  font-size: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-}
-
-.btn2{
-  width: 150px;
-  height: 50px;
-  margin-bottom: 20px;
-  background: none;
-  color: #e0e0e0;
-  border: 1px white solid;
-  border-radius: 20px;
-  font-size: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-}
-
-.btn3{
-  width: 150px;
-  height: 50px;
-  margin-bottom: 20px;
-  background: #aec3dc;
-  color: #151515;
-  border: 1px rgb(19, 19, 19) solid;
   border-radius: 20px;
   font-size: 20px;
   display: flex;
@@ -214,7 +212,7 @@
 }
 
 .score{
-  font-size: 40px;
+  font-family: 'Nunito', sans-serif;
   color: #f1f1f1;
 }
 
@@ -380,7 +378,6 @@
 }
 
 .menu-btn{
-  /* position: absolute; */
   margin: 20px;
   width: 150px;
   height: 50px;

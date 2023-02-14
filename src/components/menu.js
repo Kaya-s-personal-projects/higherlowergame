@@ -25,6 +25,12 @@ const theme = createTheme({
   }
 });
 
+
+
+
+
+
+
 var media = ['tv', 'movie', 'ova', 'ona']
 
 function Menu({ setStart, setAnimelist}){
