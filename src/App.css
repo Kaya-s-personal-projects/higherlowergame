@@ -271,7 +271,8 @@ h2 {
 
 @keyframes SlideUp2 {
   to{
-    transform: translateY(-100%);
+    -webkit-transform: translateY(-100%);
+    /* transform: translateY(-100%); */
   }
 }
 

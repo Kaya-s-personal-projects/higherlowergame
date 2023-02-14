@@ -168,8 +168,6 @@ function Game({setStart, userAnimeList, isMobile}){
 
     function displayAnime(){
             return (
-                <div style={{'position':'relative',
-                            'overflow-x':'hidden'}}>
                 <div className={isMobile ? 'game-wrapper-mobile':'game-wrapper-deskop'}>
                     <div class={isMobile ? 'game-card-wrapper-mobile' : 'game-card-wrapper-desktop'}>
                         <img src = {anime[0].main_picture_large} alt="" className={isMobile ? 'image-wrapper-mobile' : 'image-wrapper-desktop'}/>
@@ -187,7 +185,7 @@ function Game({setStart, userAnimeList, isMobile}){
                         <div class="text-wrapper">
                         <h1>"{anime[1].title}"</h1>
                         { showRating && <Counter/>}
-                        {/* <h2 className = "rating">{anime[1].mean.toFixed(2)}</h2> */}
+                        <h2 className = "rating">{anime[1].mean.toFixed(2)}</h2>
                         <button className="btn1" onClick={()=>{
                             anime[1].mean >= anime[0].mean ? answerCorrect() : answerWrong()
                         }}>Higher<div className='arrow-up'></div></button>
@@ -200,7 +198,6 @@ function Game({setStart, userAnimeList, isMobile}){
                     <div className="bottom-left">
                         <h1 className='score'>Score: {score}</h1>
 	                </div>
-                </div>
                 </div>
             )
         }
