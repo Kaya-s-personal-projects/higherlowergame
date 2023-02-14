@@ -186,7 +186,7 @@ function Game({setStart, userAnimeList, isMobile}){
                         <div class="text-wrapper">
                         <h1>"{anime[1].title}"</h1>
                         { showRating && <Counter/>}
-                        <h2 className = "rating">{anime[1].mean.toFixed(2)}</h2>
+                        {/* <h2 className = "rating">{anime[1].mean.toFixed(2)}</h2> */}
                         <button className="btn1" onClick={()=>{
                             anime[1].mean >= anime[0].mean ? answerCorrect() : answerWrong()
                         }}>Higher<div className='arrow-up'></div></button>

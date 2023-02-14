@@ -197,7 +197,7 @@ function Menu({ setStart, setAnimelist}){
 
                     
                     <div className='menu-wrapper-body-option2'>
-                    <form style={{margin: 20}} onSubmit={handleSubmit}>
+                    {/* <form style={{margin: 20}} onSubmit={handleSubmit}>
                       <label style={{color: 'white'}}>Enter your MALID:
                         <input 
                           type="text" 
@@ -207,7 +207,7 @@ function Menu({ setStart, setAnimelist}){
                       </label>
                       <input type="submit" />
                       {userIdValid && <img className ='menu-greencheck' src={greencheck}/>}
-                    </form>
+                    </form> */}
 
                     <Stack style={{margin: 30}}spacing={2} direction="row">
                     <Button variant="contained" theme={theme} onClick={(event)=>{
