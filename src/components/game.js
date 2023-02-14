@@ -168,6 +168,8 @@ function Game({setStart, userAnimeList, isMobile}){
 
     function displayAnime(){
             return (
+                <div style={{'position':'relative',
+                            'overflow-x':'hidden'}}>
                 <div className={isMobile ? 'game-wrapper-mobile':'game-wrapper-deskop'}>
                     <div class={isMobile ? 'game-card-wrapper-mobile' : 'game-card-wrapper-desktop'}>
                         <img src = {anime[0].main_picture_large} alt="" className={isMobile ? 'image-wrapper-mobile' : 'image-wrapper-desktop'}/>
@@ -198,6 +200,7 @@ function Game({setStart, userAnimeList, isMobile}){
                     <div className="bottom-left">
                         <h1 className='score'>Score: {score}</h1>
 	                </div>
+                </div>
                 </div>
             )
         }
