@@ -10,6 +10,7 @@ function App() {
 
   const [start, setStart] = useState(false);
   const [animeList, setAnimelist] = useState({});
+  const [playBy, setPlayBy] = useState('popularity');
   const isMobile = useMediaQuery({ query: `(max-width: 760px)` });
 
   const changeStart = (data) => {
@@ -21,10 +22,14 @@ function App() {
     setAnimelist(data)
   }
 
+  const changePlayBy = (data) => {
+    setPlayBy(data)
+  }
+
   return (
     <div className="App">
-      {!start && <Menu setStart = {changeStart} animeList = {animeList} setAnimelist = {changeAnimeList}/>}
-      {start  && <Game setStart = {changeStart}  userAnimeList = {animeList} isMobile = {isMobile}/>}
+      {!start && <Menu setStart = {changeStart} animeList = {animeList} setPlayBy = {changePlayBy} setAnimelist = {changeAnimeList}/>}
+      {start  && <Game setStart = {changeStart}  userAnimeList = {animeList} isMobile = {isMobile} playBy = {playBy}/>}
     </div>
   );
 }

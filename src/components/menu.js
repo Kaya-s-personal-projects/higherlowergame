@@ -30,7 +30,7 @@ const theme = createTheme({
 
 var media = ['tv', 'movie', 'ova', 'ona']
 
-function Menu({ setStart, setAnimelist}){
+function Menu({ setStart, setAnimelist, setPlayBy}){
     const [valueForUserId, setValueForUserId] = useState("");
     const [userIdValid, setUserIdValid] = useState(false);
     const [year, setYear] = useState([2002, 2022]);
@@ -81,6 +81,7 @@ function Menu({ setStart, setAnimelist}){
       
       var filteredList = animelist.filter(filterAnime)
       setAnimelist(filteredList)
+      withRating ? setPlayBy("rating"): setPlayBy("popularity")
       setStart(true);
       // var media = ['tv', 'movie', 'ova', 'ona']
       // var mediaInput = ''
@@ -213,9 +214,9 @@ function Menu({ setStart, setAnimelist}){
                     <Button variant="contained" theme={theme} onClick={(event)=>{
                           handleClassicSubmit(event)
                           }}>Classic</Button>
-                    <Button variant="contained" theme={theme} onClick={(event)=>{
+                    {/* <Button variant="contained" theme={theme} onClick={(event)=>{
                           handleCustomSubmit(event)
-                          }}>Custom</Button>
+                          }}>Custom</Button> */}
                   </Stack>
                   </div>
                   </div>

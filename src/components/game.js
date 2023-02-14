@@ -25,7 +25,7 @@ const theme = createTheme({
 
 var animeArray = animelist//anime TV shows
 
-function Game({setStart, userAnimeList, isMobile}){
+function Game({setStart, userAnimeList, isMobile, playBy}){
     const [over, setOver] = useState(false)
     const [animation, setAnimation] = useState(false)
     const [score, setScore] = useState(0)
@@ -92,8 +92,13 @@ function Game({setStart, userAnimeList, isMobile}){
 
     function Counter()
     {
+        if (playBy === "rating")
+            return (
+                <CountUp className = "rating" end={anime[1].mean} decimals={2} duration={0.4}/>
+            )
+        else if (playBy === "popularity")
         return (
-            <CountUp className = "rating" end={anime[1].mean} decimals={2} duration={0.4}/>
+            <CountUp className = "rating" end={anime[1].num_list_users} duration={0.4}/>
         )
     }
 
@@ -153,6 +158,18 @@ function Game({setStart, userAnimeList, isMobile}){
             )
         }
     }
+    function showRatingOrUser() {
+        if (playBy === "rating")
+            return(<div><h2> is rated </h2>
+                <div className = "rating">{anime[0].mean.toFixed(2)}</div>
+                <h2> on MyAnimeList</h2>
+                </div>)
+        else if (playBy === "popularity")
+            return(<div><h2> has </h2>
+                <div className = "rating">{anime[0].num_list_users}</div>
+                <h2>list users on MyAnimeList</h2>
+                </div>)
+    }
 
     function reset()
     {
@@ -167,15 +184,16 @@ function Game({setStart, userAnimeList, isMobile}){
         setAnime([a1, a2])
     }
 
+
+
     function displayAnime(){
             return (
                 <div className={isMobile ? 'game-wrapper-mobile':'game-wrapper-deskop'}>
                     <div class={isMobile ? 'game-card-wrapper-mobile' : 'game-card-wrapper-desktop'}>
                         <img src = {anime[0].main_picture_large} alt="" className={isMobile ? 'image-wrapper-mobile' : 'image-wrapper-desktop'}/>
                         <div class="text-wrapper">
-                        <h1>"{anime[0].title}"</h1><h2> is rated </h2>
-                         <div className = "rating">{anime[0].mean.toFixed(2)}</div>
-                         <h2> on MyAnimeList</h2>
+                        <h1>"{anime[0].title}"</h1>
+                            {showRatingOrUser()}
                         </div>
                     </div>
 
@@ -188,10 +206,16 @@ function Game({setStart, userAnimeList, isMobile}){
                         { showRating && <Counter/>}
                         {/* <h2 className = "rating">{anime[1].mean.toFixed(2)}</h2> */}
                         <button className="btn1" onClick={()=>{
-                            anime[1].mean >= anime[0].mean ? answerCorrect() : answerWrong()
+                            if(playBy === "rating")
+                                anime[1].mean >= anime[0].mean ? answerCorrect() : answerWrong()
+                            else if (playBy=== "popularity")
+                                anime[1].num_list_users >= anime[0].num_list_users ? answerCorrect() : answerWrong()
                         }}>Higher<div className='arrow-up'></div></button>
                         <button className="btn1"onClick={()=>{
-                            anime[1].mean <= anime[0].mean ? answerCorrect() : answerWrong()
+                            if(playBy === "rating")
+                                anime[1].mean <= anime[0].mean ? answerCorrect() : answerWrong()
+                            else if (playBy=== "popularity")
+                                anime[1].num_list_users <= anime[0].num_list_users ? answerCorrect() : answerWrong()
                         }}>Lower<div className='arrow-down'></div></button>
                         </div>
                     </div>
