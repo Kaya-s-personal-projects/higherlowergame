@@ -1,4 +1,4 @@
-import animelist from '../animelistFrom2010.json';
+import animelist from '../animelistFrom2002.json';
 import placeholder from '../animePlaceholder.json';
 import checksvg from '../svg/check.svg'
 import closesvg from '../svg/close.svg'
@@ -38,19 +38,20 @@ function Game({setStart, userAnimeList, isMobile}){
 
     const initRef = useRef(false);
     const threshold = 0.1
-    // useEffect(() => {
+    
+    useEffect(() => {
 
-    //     if (initRef.current) return;
-    //     initRef.current = true;
-    //     animeArray = userAnimeList
-    //     var a1, a2;
-    //     do
-    //     {
-    //         a1 = animeArray[Math.floor(Math.random()*animeArray.length)]
-    //         a2 = animeArray[Math.floor(Math.random()*animeArray.length)]
-    //     }while(a1['malId'] === a2['malId'] || Math.abs(a1['mean'] - a2['mean']) <= threshold)
-    //     setAnime([a1,a2])
-    //   }, []);
+        if (initRef.current) return;
+        initRef.current = true;
+        animeArray = userAnimeList
+        var a1, a2;
+        do
+        {
+            a1 = animeArray[Math.floor(Math.random()*animeArray.length)]
+            a2 = animeArray[Math.floor(Math.random()*animeArray.length)]
+        }while(a1['malId'] === a2['malId'] || Math.abs(a1['mean'] - a2['mean']) <= threshold)
+        setAnime([a1,a2])
+      }, []);
 
 
     const answerCorrect = () => {

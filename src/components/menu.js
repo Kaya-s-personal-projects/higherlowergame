@@ -14,6 +14,9 @@ import Checkbox from '@mui/material/Checkbox';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 
+import animelist from '../animelistFrom2002.json';
+
+
 const theme = createTheme({
   palette: {
     primary: {
@@ -24,12 +27,6 @@ const theme = createTheme({
     }
   }
 });
-
-
-
-
-
-
 
 var media = ['tv', 'movie', 'ova', 'ona']
 
@@ -72,8 +69,18 @@ function Menu({ setStart, setAnimelist}){
         setUserIdValid(false)
     }
 
+    const filterAnime = (anime) =>{
+      var isYearValid = anime['start_year'] >= year[0] && anime['start_year'] <= year[1]
+      var isMediaValid = mediaType[media.findIndex(m => m === anime['media_type'])]
+      return isYearValid && isMediaValid
+      
+    }
+
     const handleClassicSubmit = async (event) => {
       event.preventDefault()
+      
+      var filteredList = animelist.filter(filterAnime)
+      setAnimelist(filteredList)
       setStart(true);
       // var media = ['tv', 'movie', 'ova', 'ona']
       // var mediaInput = ''
@@ -108,7 +115,7 @@ function Menu({ setStart, setAnimelist}){
 
     const handleCustomSubmit = async (event) => {
       event.preventDefault()
-      setStart(true);
+      // setStart(true);
       // if (!userIdValid){
       //   alert('Please enter a valid MAL userId')
       //   return
@@ -154,7 +161,7 @@ function Menu({ setStart, setAnimelist}){
                   </div>
                   <div className='menu-wrapper-body'>
                     
-                    {/* <div className='menu-wrapper-body-option'>
+                    <div className='menu-wrapper-body-option'>
                       <h2 className='menu-text'>select years</h2>
                         <Box theme={theme} sx={{width: 300}}>
                         <Slider
@@ -162,7 +169,7 @@ function Menu({ setStart, setAnimelist}){
                             value={year}
                             step={1}
                             marks
-                            min={2005}
+                            min={2010}
                             max={2022}
                             onChange={handleChange}
                             valueLabelDisplay="auto"
@@ -186,11 +193,11 @@ function Menu({ setStart, setAnimelist}){
                           <FormControlLabel control={<Checkbox defaultChecked theme={theme}/>} style={{color: 'white'}} label="Rating" checked = {withRating} onChange ={() => handleChange3()}/>
                           <FormControlLabel control={<Checkbox defaultChecked theme={theme}/>} style={{color: 'white'}} label="popularity" checked = {!withRating} onChange ={() => handleChange3()}/>
                         </FormGroup>
-                    </div> */}
+                    </div>
 
                     
                     <div className='menu-wrapper-body-option2'>
-                    {/* <form style={{margin: 20}} onSubmit={handleSubmit}>
+                    <form style={{margin: 20}} onSubmit={handleSubmit}>
                       <label style={{color: 'white'}}>Enter your MALID:
                         <input 
                           type="text" 
@@ -200,7 +207,7 @@ function Menu({ setStart, setAnimelist}){
                       </label>
                       <input type="submit" />
                       {userIdValid && <img className ='menu-greencheck' src={greencheck}/>}
-                    </form> */}
+                    </form>
 
                     <Stack style={{margin: 30}}spacing={2} direction="row">
                     <Button variant="contained" theme={theme} onClick={(event)=>{
