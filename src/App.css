@@ -103,7 +103,7 @@
 }
 
 .circle-desktop{
-  position: fixed;
+  position: absolute;
   height: 100px;
   width: 100px;
   border-radius: 50%;
@@ -115,7 +115,7 @@
 }
 
 .circle-mobile{
-  position: fixed;
+  position: absolute;
   height: 70px;
   width: 70px;
   border-radius: 50%;
@@ -168,12 +168,12 @@
   display: flex;
   flex-direction: column;
   position: absolute;
-  max-width: 70%;
+  max-width: 80%;
   height: auto;
   text-align: center;
 
   color:rgb(255, 255, 255);
-  border: 1px green solid;
+  /* border: 1px green solid; */
   align-items: center;
   justify-content: center;
 
