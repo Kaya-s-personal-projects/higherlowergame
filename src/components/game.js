@@ -144,7 +144,7 @@ function Game({setStart, userAnimeList, isMobile, playBy, gameMode}){
         if (gameStatus==="correct"){
             return(
                 <div className={isMobile ? "circle-mobile" :"circle-desktop"}>
-                    <div className='correct'/>
+                    <div className={isMobile ? "correct-mobile" :"correct-desktop"}/>
                     <motion.div
                         className = 'svg'
                         initial={{ scale: 0 }}
@@ -164,7 +164,7 @@ function Game({setStart, userAnimeList, isMobile, playBy, gameMode}){
         {
             return(
                 <div className={isMobile ? "circle-mobile" :"circle-desktop"}>
-                <div className='wrong'/>
+                <div className={isMobile ? "wrong-mobile" :"wrong-desktop"}/>
                 <motion.div
                     className = 'svg'
                     initial={{ scale: 0 }}

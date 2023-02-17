@@ -114,7 +114,7 @@
   }
 }
 
-.correct{
+.correct-desktop{
   height: 105px;
   width: 105px;
   overflow: hidden;
@@ -123,13 +123,31 @@
   animation: SlideUp .3s ease-in-out;
 }
 
-.wrong{
+.correct-mobile{
+  height: 105px;
+  width: 105px;
+  overflow: hidden;
+  border-radius: 50%;
+  background-color: #6ef3b7;
+  position: absolute;
+}
+
+.wrong-desktop{
   height: 105px;
   width: 105px;
   overflow: hidden;
   background-color: #f4483f;
   position: absolute;
   animation: SlideUp .3s ease-in-out;
+}
+
+.wrong-mobile{
+  height: 105px;
+  width: 105px;
+  overflow: hidden;
+  border-radius: 50%;
+  background-color: #f4483f;
+  position: absolute;
 }
 
 .timer-wrapper{
