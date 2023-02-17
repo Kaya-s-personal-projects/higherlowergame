@@ -68,30 +68,9 @@
 
 /* Bottom left text */
 .bottom-left {
-  position: absolute;
+  position: fixed;
   bottom: 2px;
   left: 6px;
-}
-
-/* Top left text */
-.top-left {
-  position: absolute;
-  top: 8px;
-  left: 16px;
-}
-
-/* Top right text */
-.top-right {
-  position: absolute;
-  top: 8px;
-  right: 16px;
-}
-
-/* Bottom right text */
-.bottom-right {
-  position: absolute;
-  bottom: 8px;
-  right: 16px;
 }
 
 /* Centered text */
@@ -176,11 +155,27 @@
   z-index: 1;
 }
 
-.text-wrapper{
+.text-wrapper-desktop{
   display: flex;
   flex-direction: column;
   position: absolute;
   max-width: 80%;
+  height: auto;
+  text-align: center;
+
+  color:rgb(255, 255, 255);
+  /* border: 1px green solid; */
+  align-items: center;
+  justify-content: center;
+
+  font-family: 'Nunito', sans-serif;
+}
+
+.text-wrapper-mobile{
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  max-width: 90%;
   height: auto;
   text-align: center;
 
@@ -218,7 +213,7 @@ h2 {
 }
 
 .rating{
-  font-size: 50px;
+  font-size: 45px;
   font-weight: bold;
   color: #fff34a;
 }

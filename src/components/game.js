@@ -250,7 +250,7 @@ function Game({setStart, userAnimeList, isMobile, playBy, gameMode}){
                 <div className={isMobile ? 'game-wrapper-mobile':'game-wrapper-deskop'}>
                     <div class={isMobile ? 'game-card-wrapper-mobile' : 'game-card-wrapper-desktop'}>
                         <img src = {anime[0].main_picture_large} alt="" className={isMobile ? 'image-wrapper-mobile' : 'image-wrapper-desktop'}/>
-                        <div class="text-wrapper">
+                        <div class={isMobile ? 'text-wrapper-mobile' : 'text-wrapper-desktop'}>
                         <h1>"{anime[0].title}"</h1>
                             {showRatingOrUser()}
                         </div>
@@ -260,10 +260,10 @@ function Game({setStart, userAnimeList, isMobile, playBy, gameMode}){
                         <img src = {anime[1].main_picture_large} alt="" className={isMobile ? 'image-wrapper-mobile' : 'image-wrapper-desktop'}/>
                         {animation && <Animation/>}
 
-                        <div class="text-wrapper">
+                        <div class={isMobile ? 'text-wrapper-mobile' : 'text-wrapper-desktop'}>
                         <h1>"{anime[1].title}"</h1>
                         { showRating && <Counter/>}
-                        <h2 className = "rating">{anime[1].mean.toFixed(2)}</h2>
+                        {/* <h2 className = "rating">{anime[1].mean.toFixed(2)}</h2> */}
                         <button className="btn1" onClick={()=>{
                             if(playBy === "rating")
                                 anime[1].mean >= anime[0].mean ? answerCorrect() : answerWrong()
