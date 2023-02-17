@@ -30,7 +30,7 @@ const theme = createTheme({
 
 var media = ['tv', 'movie', 'ova', 'ona']
 
-function Menu({ setStart, setAnimelist, setPlayBy}){
+function Menu({ setStart, setAnimelist, setPlayBy, setGameMode}){
     const [valueForUserId, setValueForUserId] = useState("");
     const [userIdValid, setUserIdValid] = useState(false);
     const [year, setYear] = useState([2002, 2022]);
@@ -82,6 +82,7 @@ function Menu({ setStart, setAnimelist, setPlayBy}){
       var filteredList = animelist.filter(filterAnime)
       setAnimelist(filteredList)
       withRating ? setPlayBy("rating"): setPlayBy("popularity")
+      setGameMode('classic')
       setStart(true);
       // var media = ['tv', 'movie', 'ova', 'ona']
       // var mediaInput = ''
@@ -135,6 +136,15 @@ function Menu({ setStart, setAnimelist, setPlayBy}){
       // }
     }
 
+    const handleClockSubmit = async (event) => {
+      event.preventDefault()
+      var filteredList = animelist.filter(filterAnime)
+      setAnimelist(filteredList)
+      withRating ? setPlayBy("rating"): setPlayBy("popularity")
+      setGameMode('clock')
+      setStart(true);
+    }
+
     const handleChange = (event, newValue) => {
       setYear(newValue);
     };
@@ -155,6 +165,7 @@ function Menu({ setStart, setAnimelist, setPlayBy}){
     {
         return (
             <div className='menu-bg-wrapper'>
+                
                 <img className = 'menu-bg' src={classroomImg}/>
                 <div className='menu-wrapper'>
                   <div className='menu-wrapper-header'>
@@ -170,7 +181,7 @@ function Menu({ setStart, setAnimelist, setPlayBy}){
                             value={year}
                             step={1}
                             marks
-                            min={2010}
+                            min={2002}
                             max={2022}
                             onChange={handleChange}
                             valueLabelDisplay="auto"
@@ -191,7 +202,7 @@ function Menu({ setStart, setAnimelist, setPlayBy}){
                         </FormGroup>
                         <h2 className='menu-text'>Play by</h2>
                         <FormGroup row> 
-                          <FormControlLabel control={<Checkbox defaultChecked theme={theme}/>} style={{color: 'white'}} label="Rating" checked = {withRating} onChange ={() => handleChange3()}/>
+                          <FormControlLabel control={<Checkbox defaultChecked theme={theme}/>} style={{color: 'white'}} label="Rating" checked = {withRating} click onChange ={() => handleChange3()}/>
                           <FormControlLabel control={<Checkbox defaultChecked theme={theme}/>} style={{color: 'white'}} label="popularity" checked = {!withRating} onChange ={() => handleChange3()}/>
                         </FormGroup>
                     </div>
@@ -214,9 +225,9 @@ function Menu({ setStart, setAnimelist, setPlayBy}){
                     <Button variant="contained" theme={theme} onClick={(event)=>{
                           handleClassicSubmit(event)
                           }}>Classic</Button>
-                    {/* <Button variant="contained" theme={theme} onClick={(event)=>{
-                          handleCustomSubmit(event)
-                          }}>Custom</Button> */}
+                    <Button variant="contained" theme={theme} onClick={(event)=>{
+                          handleClockSubmit(event)
+                          }}>Beat the Clock</Button>
                   </Stack>
                   </div>
                   </div>

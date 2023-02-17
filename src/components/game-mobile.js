@@ -36,6 +36,7 @@ function Game({setStart, userAnimeList}){
     var a1 = animeArray[Math.floor(Math.random()*animeArray.length)]
     var a2 = animeArray[Math.floor(Math.random()*animeArray.length)]
     const [anime, setAnime] = useState([a1, a2])
+    const [timer, setTimer] = useState(true);
 
     const initRef = useRef(false);
     const threshold = 0.1
@@ -52,6 +53,7 @@ function Game({setStart, userAnimeList}){
     //     }while(a1['malId'] === a2['malId'] || Math.abs(a1['mean'] - a2['mean']) <= threshold)
     //     setAnime([a1,a2])
     //   }, []);
+    
 
 
     const answerCorrect = () => {

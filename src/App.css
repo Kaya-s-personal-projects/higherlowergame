@@ -104,8 +104,8 @@
 
 .circle-desktop{
   position: absolute;
-  height: 100px;
-  width: 100px;
+  height: 70px;
+  width: 70px;
   border-radius: 50%;
   background-color: #fbf9f9;
   overflow: hidden;
@@ -139,7 +139,7 @@
   height: 105px;
   width: 105px;
   overflow: hidden;
-  background-color: #56F5B6;
+  background-color: #6ef3b7;
   position: absolute;
   animation: SlideUp .3s ease-in-out;
 }
@@ -148,9 +148,21 @@
   height: 105px;
   width: 105px;
   overflow: hidden;
-  background-color: #F57156;
+  background-color: #f4483f;
   position: absolute;
   animation: SlideUp .3s ease-in-out;
+}
+
+.timer-wrapper{
+  display: flex;
+  height: 70px;
+  width: 70px;
+  border-radius: 50%;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  background-color: #f7f3f3;
+  /* border: 1px red solid; */
 }
 
 .svg{

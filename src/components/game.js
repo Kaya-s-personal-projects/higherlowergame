@@ -11,6 +11,8 @@ import '../App.css'
 import { createTheme } from '@mui/material/styles';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
+import { CountdownCircleTimer } from 'react-countdown-circle-timer'
+
 
 const theme = createTheme({
     palette: {
@@ -25,16 +27,19 @@ const theme = createTheme({
 
 var animeArray = animelist//anime TV shows
 
-function Game({setStart, userAnimeList, isMobile, playBy}){
+function Game({setStart, userAnimeList, isMobile, playBy, gameMode}){
     const [over, setOver] = useState(false)
     const [animation, setAnimation] = useState(false)
     const [score, setScore] = useState(0)
-    const [status, setStatus] = useState(0)
+    const [gameStatus, setGameStatus] = useState("")
     const [showRating, setShowRating] = useState(false)
     const [animeBuffer, setAnimeBuffer] = useState(null)
     var a1 = animeArray[Math.floor(Math.random()*animeArray.length)]
     var a2 = animeArray[Math.floor(Math.random()*animeArray.length)]
     const [anime, setAnime] = useState([a1, a2])
+    const [timer, setTimer] = useState(true)
+    const [timerKey, setTimerKey] = useState(0)
+    const [timerDuration, setTimerDuration] = useState(10)
 
     const initRef = useRef(false);
     const threshold = 0.1
@@ -55,11 +60,13 @@ function Game({setStart, userAnimeList, isMobile, playBy}){
 
 
     const answerCorrect = () => {
-    
+        
+        setTimer(false)
+
         setShowRating(true)
         let animeBuffer = anime[1]
         setAnimeBuffer(animeBuffer)
-        setStatus(1)
+        setGameStatus("correct")
         let newAnime
         do{
             newAnime = animeArray[Math.floor(Math.random()*animeArray.length)]
@@ -69,23 +76,32 @@ function Game({setStart, userAnimeList, isMobile, playBy}){
             setAnimation(true)
             setAnime([anime[0], newAnime]);
             setShowRating(false)
-            setStatus(0)
         },800)
 
         setTimeout(() => {
             setScore(score+1);
             setAnimation(false)
             setAnime([animeBuffer, newAnime]);
+            if(timerKey>=19)
+                setTimerDuration(5)
+            else if(timerKey>=9)
+                setTimerDuration(7)
+            else
+                setTimerDuration(10)
+            setTimerKey(timerKey+1);//restart timer
+            setTimer(true);//restart animation
+            setGameStatus("")
         }, 1200)
     }
 
     function answerWrong()
     {
-        setStatus(2)
+        setTimer(false)
+        setGameStatus("wrong")
         setShowRating(true)
         setTimeout(() => {
             setShowRating(false)
-            setStatus(0)
+            setGameStatus("")
             setOver(true)
         }, 1500)
     }
@@ -111,31 +127,24 @@ function Game({setStart, userAnimeList, isMobile, playBy}){
         )
     }
 
-    function CircleStatus()
-    {
-        if(status===1){
-            return(
-                    <div className={isMobile ? "circle-mobile" :"circle-desktop"}>
-                        <div className='correct'/>
-                        <motion.div
-                            className = 'svg'
-                            initial={{ scale: 0 }}
-                            animate={{ scale: 1 }}
-                            transition={{
-                                type: "spring",
-                                stiffness: 260,
-                                damping: 20
-                        }}
-                        >
-                        <img className = 'svg' src={checksvg}/>
-                        </motion.div>
-                    </div>
+    const renderTime = ({ remainingTime }) => {
+        if (remainingTime === 0) {
+          return <div className="timer">Too lale...</div>;
+        }
+      
+        return (
+          <div className="timer">
+            <h1>{remainingTime}</h1>
+          </div>
+        );
+      };
 
-            )
-        }else if (status === 2){
+    function showInGameStatus()
+    {
+        if (gameStatus==="correct"){
             return(
                 <div className={isMobile ? "circle-mobile" :"circle-desktop"}>
-                    <div className='wrong'/>
+                    <div className='correct'/>
                     <motion.div
                         className = 'svg'
                         initial={{ scale: 0 }}
@@ -144,20 +153,68 @@ function Game({setStart, userAnimeList, isMobile, playBy}){
                             type: "spring",
                             stiffness: 260,
                             damping: 20
-                            
-                    }}>
-                    <img className = 'svg' src={closesvg}/>
+                    }}
+                    >
+                    <img className = 'svg' src={checksvg}/>
                     </motion.div>
                 </div>
-            )
-        }else{
+        )
+        }
+        else if (gameStatus==="wrong")
+        {
             return(
                 <div className={isMobile ? "circle-mobile" :"circle-desktop"}>
-                    <h1 className='vs'>VS</h1>
-                </div>
+                <div className='wrong'/>
+                <motion.div
+                    className = 'svg'
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{
+                        type: "spring",
+                        stiffness: 260,
+                        damping: 20
+                        
+                }}>
+                <img className = 'svg' src={closesvg}/>
+                </motion.div>
+            </div>
+            )
+        }
+        else{
+            if (gameMode==='classic'){
+                return(
+                    <div className={isMobile ? "circle-mobile" :"circle-desktop"}>
+                            <h1 className='vs'>VS</h1>
+                        </div>  
+                )
+            }
+        }
+        
+    }
+
+    function showTimer(){
+        if (gameMode==='clock'){
+            return(
+                <div className="timer-wrapper">
+                <CountdownCircleTimer
+                key={timerKey}
+                size={84}
+                strokeWidth={8}
+                isPlaying={timer}
+                duration={timerDuration}
+                colors={["#6ef3b7" , "#f4483f", "#A30000"]}
+                trailColor = {'rgba(52, 52, 52, 0.0)'}
+                isSmoothColorTransition = {false}
+                colorsTime={[ 10, 3, 0]}
+                onComplete={() => (answerWrong())}
+                >
+                {gameStatus === "" && renderTime}
+                </CountdownCircleTimer>
+            </div>
             )
         }
     }
+
     function showRatingOrUser() {
         if (playBy === "rating")
             return(<div><h2> is rated </h2>
@@ -173,8 +230,6 @@ function Game({setStart, userAnimeList, isMobile, playBy}){
 
     function reset()
     {
-        setScore(0)
-        setOver(false)
         var a1, a2;
         do
         {
@@ -182,6 +237,10 @@ function Game({setStart, userAnimeList, isMobile, playBy}){
             a2 = animeArray[Math.floor(Math.random()*animeArray.length)]
         }while(a1['malId'] === a2['malId'] || Math.abs(a1['mean'] - a2['mean']) <= threshold)
         setAnime([a1, a2])
+        setTimerKey(timerKey+1);
+        setTimer(true);
+        setScore(0)
+        setOver(false)
     }
 
 
@@ -204,7 +263,7 @@ function Game({setStart, userAnimeList, isMobile, playBy}){
                         <div class="text-wrapper">
                         <h1>"{anime[1].title}"</h1>
                         { showRating && <Counter/>}
-                        {/* <h2 className = "rating">{anime[1].mean.toFixed(2)}</h2> */}
+                        <h2 className = "rating">{anime[1].mean.toFixed(2)}</h2>
                         <button className="btn1" onClick={()=>{
                             if(playBy === "rating")
                                 anime[1].mean >= anime[0].mean ? answerCorrect() : answerWrong()
@@ -219,7 +278,9 @@ function Game({setStart, userAnimeList, isMobile, playBy}){
                         }}>Lower<div className='arrow-down'></div></button>
                         </div>
                     </div>
-                    <CircleStatus/>
+                    {showTimer()}
+                    {showInGameStatus()}
+
                     <div className="bottom-left">
                         <h1 className='score'>Score: {score}</h1>
 	                </div>
