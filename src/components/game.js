@@ -1,5 +1,4 @@
-import animelist from '../animelistFrom2002.json';
-import placeholder from '../animePlaceholder.json';
+import animelist from '../data/animelistFrom2002.json';
 import checksvg from '../svg/check.svg'
 import closesvg from '../svg/close.svg'
 import React, {useRef, useState, useEffect} from 'react'; 

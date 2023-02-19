@@ -14,7 +14,8 @@ import Checkbox from '@mui/material/Checkbox';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 
-import animelist from '../animelistFrom2002.json';
+import animelist from '../data/animelistFrom2002.json';
+import top500list from '../data/top500.json';
 
 
 const theme = createTheme({
@@ -30,7 +31,7 @@ const theme = createTheme({
 
 var media = ['tv', 'movie', 'ova', 'ona']
 
-function Menu({ setStart, setAnimelist, setPlayBy, setGameMode}){
+function Menu({isMobile, setStart, setAnimelist, setPlayBy, setGameMode}){
     const [valueForUserId, setValueForUserId] = useState("");
     const [userIdValid, setUserIdValid] = useState(false);
     const [year, setYear] = useState([2002, 2022]);
@@ -145,6 +146,14 @@ function Menu({ setStart, setAnimelist, setPlayBy, setGameMode}){
       setStart(true);
     }
 
+    const handleTop500Submit = (event) => {
+      event.preventDefault()
+      setAnimelist(top500list)
+      withRating ? setPlayBy("rating"): setPlayBy("popularity")
+      setGameMode('classic')
+      setStart(true);
+    }
+
     const handleChange = (event, newValue) => {
       setYear(newValue);
     };
@@ -167,13 +176,13 @@ function Menu({ setStart, setAnimelist, setPlayBy, setGameMode}){
             <div className='menu-bg-wrapper'>
                 
                 <img className = 'menu-bg' src={classroomImg}/>
-                <div className='menu-wrapper'>
-                  <div className='menu-wrapper-header'>
+                <div className='menu-wrapper' style = {isMobile && {maxWidth: 400}}>
+                  <div className='menu-wrapper-header' style = {isMobile && {maxWidth: 400}}>
                   <h1 className='menu-text'>Anime HigherLower Game</h1>
                   </div>
                   <div className='menu-wrapper-body'>
                     
-                    <div className='menu-wrapper-body-option'>
+                    <div className='menu-wrapper-body-option'style = {isMobile && {maxWidth: 400}}>
                       <h2 className='menu-text'>select years</h2>
                         <Box theme={theme} sx={{width: 300}}>
                         <Slider
@@ -208,7 +217,7 @@ function Menu({ setStart, setAnimelist, setPlayBy, setGameMode}){
                     </div>
 
                     
-                    <div className='menu-wrapper-body-option2'>
+                    <div className='menu-wrapper-body-option2' style = {isMobile && {maxWidth: 400}}>
                     {/* <form style={{margin: 20}} onSubmit={handleSubmit}>
                       <label style={{color: 'white'}}>Enter your MALID:
                         <input 
@@ -232,13 +241,13 @@ function Menu({ setStart, setAnimelist, setPlayBy, setGameMode}){
                   </div>
                   </div>
                 </div>
-                <div className='menu-wrapper'>
-                  <div className='menu-wrapper-body-option2'>
-                  <p style={{'margin': '20px', 'color': '#e0e0e0'}}>Test how well you know about anime shows performance on MyAnimelist by playing the latest Anime Higherlower game. 
-                    Not sure where to start or not an anime veteran? Try out the Top 500 mode and see how well do you know about the most popular anime!</p>
+                <div className='menu-wrapper'style = {isMobile && {maxWidth: 400}}>
+                  <div className='menu-wrapper-body-option2' style = {isMobile && {maxWidth: 400}}>
+                  <p style={{'margin': '15px', 'color': '#e0e0e0'}}>Test your knowledge on how well anime shows perform on MyAnimelist by playing the latest Anime Higherlower game. 
+                    Not an anime veteran? Try out the Top 500 mode and see how well you know about the most popular anime!</p>
 
                     <Button variant="contained" theme={theme} onClick={(event)=>{
-                          handleClassicSubmit(event)
+                          handleTop500Submit(event)
                           }}>Top500</Button>
                   </div>
                 </div>
