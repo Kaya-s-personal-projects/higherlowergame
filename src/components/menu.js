@@ -176,13 +176,13 @@ function Menu({isMobile, setStart, setAnimelist, setPlayBy, setGameMode}){
             <div className='menu-bg-wrapper'>
                 
                 <img className = 'menu-bg' src={classroomImg}/>
-                <div className='menu-wrapper' style = {isMobile && {maxWidth: 400}}>
-                  <div className='menu-wrapper-header' style = {isMobile && {maxWidth: 400}}>
+                <div className='menu-wrapper' style = {isMobile ? {maxWidth: 400}: {}}>
+                  <div className='menu-wrapper-header' style = {isMobile ? {maxWidth: 400}: {}}>
                   <h1 className='menu-text'>Anime HigherLower Game</h1>
                   </div>
                   <div className='menu-wrapper-body'>
                     
-                    <div className='menu-wrapper-body-option'style = {isMobile && {maxWidth: 400}}>
+                    <div className='menu-wrapper-body-option'style = {isMobile ? {maxWidth: 400}: {}}>
                       <h2 className='menu-text'>select years</h2>
                         <Box theme={theme} sx={{width: 300}}>
                         <Slider
@@ -217,7 +217,7 @@ function Menu({isMobile, setStart, setAnimelist, setPlayBy, setGameMode}){
                     </div>
 
                     
-                    <div className='menu-wrapper-body-option2' style = {isMobile && {maxWidth: 400}}>
+                    <div className='menu-wrapper-body-option2' style = {isMobile ? {maxWidth: 400}: {}}>
                     {/* <form style={{margin: 20}} onSubmit={handleSubmit}>
                       <label style={{color: 'white'}}>Enter your MALID:
                         <input 
@@ -241,10 +241,10 @@ function Menu({isMobile, setStart, setAnimelist, setPlayBy, setGameMode}){
                   </div>
                   </div>
                 </div>
-                <div className='menu-wrapper'style = {isMobile && {maxWidth: 400}}>
-                  <div className='menu-wrapper-body-option2' style = {isMobile && {maxWidth: 400}}>
+                <div className='menu-wrapper'style = {isMobile ? {maxWidth: 400}: {}}>
+                  <div className='menu-wrapper-body-option2' style = {isMobile ? {maxWidth: 400}: {}}>
                   <p style={{'margin': '15px', 'color': '#e0e0e0'}}>Test your knowledge on how well anime shows perform on MyAnimelist by playing the latest Anime Higherlower game. 
-                    Not an anime veteran? Try out the Top 500 mode and see how well you know about the most popular anime!</p>
+                    Not an anime veteran? Try out the Top500 gamemode and see how well you know about the most popular anime!</p>
 
                     <Button variant="contained" theme={theme} onClick={(event)=>{
                           handleTop500Submit(event)
