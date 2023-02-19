@@ -232,6 +232,16 @@ function Menu({ setStart, setAnimelist, setPlayBy, setGameMode}){
                   </div>
                   </div>
                 </div>
+                <div className='menu-wrapper'>
+                  <div className='menu-wrapper-body-option2'>
+                  <p style={{'margin': '20px', 'color': '#e0e0e0'}}>Test how well you know about anime shows performance on MyAnimelist by playing the latest Anime Higherlower game. 
+                    Not sure where to start or not an anime veteran? Try out the Top 500 mode and see how well do you know about the most popular anime!</p>
+
+                    <Button variant="contained" theme={theme} onClick={(event)=>{
+                          handleClassicSubmit(event)
+                          }}>Top500</Button>
+                  </div>
+                </div>
               </div>
             )
     }

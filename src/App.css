@@ -214,6 +214,12 @@ h2 {
   font-weight:400;
 }
 
+h3 {
+  font-weight:200;
+  line-height: 0.5;
+  color: #dcdcdc;
+}
+
 
 .btn1{
   width: 120px;
@@ -276,6 +282,9 @@ h2 {
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  color: #f1f1f1;
+
+  font-family: 'Nunito', sans-serif;
 }
 
 @keyframes SlideUp {
@@ -315,6 +324,7 @@ h2 {
 .menu-bg-wrapper{
   background-image: linear-gradient(to top, #041c32, #031f34, #032135, #032437, #032638, #03293c, #042d40, #043044, #04354c, #053b53, #05405b, #064663);
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100vh;
@@ -324,16 +334,16 @@ h2 {
 }
 
 .menu-wrapper{
-  height: 600px;
-  width: 600px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow: hidden;
   justify-content: top;
   background-color: #3c3c3e;
   border-radius: 10px;
+  margin: 5px;
   filter: drop-shadow(0 0 0.75rem rgb(29, 29, 29));
-  /* border: 3px solid red; */
+  border: 1px solid rgb(36, 36, 36);
 }
 
 .menu-wrapper-header{
@@ -374,9 +384,9 @@ h2 {
   height: 200px;
   width: 600px;
   /* background-color: #3c3c3e; */
-  margin: auto;
   flex-direction: column;
   display: flex;
+  text-align: center;
   align-items: center;
   justify-content: center;
   /* border: 1px solid blueviolet; */

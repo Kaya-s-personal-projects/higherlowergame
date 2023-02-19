@@ -40,6 +40,8 @@ function Game({setStart, userAnimeList, isMobile, playBy, gameMode}){
     const [timer, setTimer] = useState(true)
     const [timerKey, setTimerKey] = useState(0)
     const [timerDuration, setTimerDuration] = useState(10)
+    const [maxScore, setMaxScore] = useState(0)
+    const [bottonDisable, setBottonDisable] = useState(false)
 
     const initRef = useRef(false);
     const threshold = 0.1
@@ -60,7 +62,7 @@ function Game({setStart, userAnimeList, isMobile, playBy, gameMode}){
 
 
     const answerCorrect = () => {
-        
+        setBottonDisable(true)
         setTimer(false)
 
         setShowRating(true)
@@ -90,18 +92,21 @@ function Game({setStart, userAnimeList, isMobile, playBy, gameMode}){
                 setTimerDuration(10)
             setTimerKey(timerKey+1);//restart timer
             setTimer(true);//restart animation
+            setBottonDisable(false)
             setGameStatus("")
         }, 1200)
     }
 
     function answerWrong()
     {
+        setBottonDisable(true)
         setTimer(false)
         setGameStatus("wrong")
         setShowRating(true)
         setTimeout(() => {
             setShowRating(false)
             setGameStatus("")
+            setBottonDisable(false)
             setOver(true)
         }, 1500)
     }
@@ -264,13 +269,13 @@ function Game({setStart, userAnimeList, isMobile, playBy, gameMode}){
                         <h1>"{anime[1].title}"</h1>
                         { showRating && <Counter/>}
                         {/* <h2 className = "rating">{anime[1].mean.toFixed(2)}</h2> */}
-                        <button className="btn1" onClick={()=>{
+                        <button className="btn1" disabled={bottonDisable} onClick={()=>{
                             if(playBy === "rating")
                                 anime[1].mean >= anime[0].mean ? answerCorrect() : answerWrong()
                             else if (playBy=== "popularity")
                                 anime[1].num_list_users >= anime[0].num_list_users ? answerCorrect() : answerWrong()
                         }}>Higher<div className='arrow-up'></div></button>
-                        <button className="btn1"onClick={()=>{
+                        <button className="btn1" disabled={bottonDisable} onClick={()=>{
                             if(playBy === "rating")
                                 anime[1].mean <= anime[0].mean ? answerCorrect() : answerWrong()
                             else if (playBy=== "popularity")
@@ -289,11 +294,14 @@ function Game({setStart, userAnimeList, isMobile, playBy, gameMode}){
         }
 
     function gameOver(){
+        if (score > maxScore)
+            setMaxScore(score)
         return (
                 <div className="lost-overlay">
                     <div className="lost-box">
-                    <h1 style={{color: '#f1f1f1'}}>You Lost</h1>
-                    <h2 style={{color: '#f1f1f1'}}>Your score is {score}</h2>
+                    <h1>You Lost</h1>
+                    <h2>Your score is {score}</h2>
+                    <h3>Highest score: {maxScore}</h3>
                     <Stack style={{margin: 30}}spacing={2} direction="row">
                         <Button variant="contained" theme={theme} onClick={()=>{
                             reset()
